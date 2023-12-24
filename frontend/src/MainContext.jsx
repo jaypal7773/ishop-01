@@ -19,14 +19,15 @@ function MainContext(props) {
     useEffect(
         () => {
             fetchCategory()
+            fetchColor()
         }, []
     )
 
-    useEffect(
-        () => {
-            fetchColor()
-        },[]
-    )
+    // useEffect(
+    //     () => {
+    //         fetchColor()
+    //     },[]
+    // )
 
     const fetchCategory = () => {
         axios.get(`${apibaseurl}${categorybaseurl}`)
@@ -46,40 +47,37 @@ function MainContext(props) {
             )
     }
 
-    const fetchColor = () => {
-        axios.get(apibaseurl+colorbaseurl)
-            .then(
-                (success) => {
-                    if (success.data.status === 1) {
-                        setColor(success.data.color)
-                    } else {
-                        setColor([])
-                    }
-                }
-            ).catch(
-                (error) => {
-                    setColor([])
-                }
-            )
-    }
-
     // const fetchColor = () => {
     //     axios.get(apibaseurl+colorbaseurl)
-    //     .then(
-    //         (success) => {
-    //             if(success.data.status == 1){
-    //                 setColor(success.data.color)
-    //             }else{
+    //         .then(
+    //             (success) => {
+    //                 if (success.data.status === 1) {
+    //                     setColor(success.data.color)
+    //                 } else {
+    //                     setColor([])
+    //                 }
+    //             }
+    //         ).catch(
+    //             (error) => {
     //                 setColor([])
     //             }
-    //         }
-    //     ).catch(
-    //         (error) => {
-    //             setColor([])
-    //         }
-    //     )
+    //         )
     // }
 
+    const fetchColor = () => {
+        axios
+          .get(`${apibaseurl}${colorbaseurl}`)
+          .then((success) => {
+            if (success.data.status == 1) {
+              setColor(success.data.color);
+            } else {
+              setColor([]);
+            }
+          })
+          .catch((error) => {
+            setColor([]);
+          });
+      };
 
     return (
         <Context.Provider value={{

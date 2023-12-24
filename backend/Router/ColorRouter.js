@@ -37,23 +37,23 @@ ColorRouter.post(
     }
 )
 
-ColorRouter.delete(
-    "/delete/:id",
-    (req,res) => {
-        const id = req.params.id
-        const result = new ColorController().delete(id)
-        result
-        .then(
-            (success) => {
-                res.send(success)
-            }
-        ).catch(
-            (error) => {
-                res.send(error)
-            }
-        )
-    }
-)
+// ColorRouter.delete(
+//     "/delete/:id",
+//     (req,res) => {
+//         const id = req.params.id
+//         const result = new ColorController().delete(id)
+//         result.then(
+//             (success) => {
+//                 res.send(success)
+//             }
+//         )
+//         result.catch(
+//             (error) => {
+//                 res.send(error)
+//             }
+//         )
+//     }
+// )
 
 ColorRouter.patch(
     "/update/:id",
@@ -73,7 +73,7 @@ ColorRouter.patch(
 )
 
 ColorRouter.get(
-    "/updatestatus/:id/:newStatus",
+    '/updatestatus/:id/:newStatus',
     (req,res) => {
         const id = req.params.id
         const result = new ColorController().changestatus(id , req.params.newStatus)
@@ -88,6 +88,6 @@ ColorRouter.get(
             }
         )
     }
-)
+) 
 
 module.exports = ColorRouter

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const ColorSchema = mongoose.Schema(
-    {
+    {     
         name:{
             type: String
         },
@@ -13,7 +13,7 @@ const ColorSchema = mongoose.Schema(
             default : true
         },
         color:{
-            type: String,
+            type: Boolean,
             default: null
         }
     },

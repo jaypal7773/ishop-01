@@ -21,7 +21,7 @@ function CategoryView() {
         if(success.data.status === 1){
           fetchCategory()
         }
-      }
+      }  
     ).catch(
       (error) => {
         console.log(error)
@@ -40,6 +40,7 @@ function CategoryView() {
         console.log(error);
       });
   }
+
   return (
     <div>
       <div className="relative overflow-x-auto">
