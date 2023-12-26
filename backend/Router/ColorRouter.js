@@ -23,50 +23,51 @@ ColorRouter.get(
 
 ColorRouter.post(
     "/create",
-   async (req,res) => {
-    await new ColorController().create(req.body)
-    .then(
-        (success) => {
-            res.send(success)
-        }
-    ).catch(
-        (error) => {
-            res.send(error)
-        }
-    )
+    async (req, res) => {
+        await new ColorController().create(req.body)
+            .then(
+                (success) => {
+                    res.send("Color created")
+                }
+            )
+            .catch(
+                (error) => {
+                    res.send("Data not Created")
+                }
+            )
+    }
+)
+ 
+ColorRouter.delete(
+    "/delete/:id",
+    (req,res) => {
+        const id = req.params.id
+        const result = new ColorController().delete(id)
+        result.then( 
+            (success) => {
+                res.send(success)
+            }
+        )
+        result.catch(
+            (error) => {
+                res.send(error)
+            }
+        )
     }
 )
 
-// ColorRouter.delete(
-//     "/delete/:id",
-//     (req,res) => {
-//         const id = req.params.id
-//         const result = new ColorController().delete(id)
-//         result.then(
-//             (success) => {
-//                 res.send(success)
-//             }
-//         )
-//         result.catch(
-//             (error) => {
-//                 res.send(error)
-//             }
-//         )
-//     }
-// )
-
 ColorRouter.patch(
-    "/update/:id",
+    "/edit/:id",
     (req,res) => {
         const id = req.params.id
         const result = new ColorController().update(id , req.body)
         .then(
             (success) => {
-                res.send(success)
+                res.send("Data edit successfully")
             }
         ).catch(
             (error) => {
-                res.send(error)
+                res.send("Unable to edit data")
             }
         )
     }

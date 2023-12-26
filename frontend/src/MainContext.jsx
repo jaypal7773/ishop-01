@@ -47,37 +47,40 @@ function MainContext(props) {
             )
     }
 
+    const fetchColor = () => {
+        axios.get(`${apibaseurl}${colorbaseurl}`)
+            .then(
+                (success) => {
+                    if (success.data.status === 1) {
+                        setColor(success.data.color)
+                    } else {
+                        setColor([])
+                    }
+                }
+            ).catch(
+                (error) => {
+                    setColor([])
+                }
+            )
+    }
+
     // const fetchColor = () => {
     //     axios.get(apibaseurl+colorbaseurl)
-    //         .then(
-    //             (success) => {
-    //                 if (success.data.status === 1) {
-    //                     setColor(success.data.color)
-    //                 } else {
-    //                     setColor([])
-    //                 }
-    //             }
-    //         ).catch(
-    //             (error) => {
+    //     .then(
+    //         (success) => {
+    //             if(success.data.status == 1){
+    //                 setColor(success.data.color)
+    //             }else{
     //                 setColor([])
     //             }
-    //         )
+    //         }
+    //     ).catch(
+    //         (error) => {
+    //             setColor([])
+    //         }
+    //     )
     // }
 
-    const fetchColor = () => {
-        axios
-          .get(`${apibaseurl}${colorbaseurl}`)
-          .then((success) => {
-            if (success.data.status == 1) {
-              setColor(success.data.color);
-            } else {
-              setColor([]);
-            }
-          })
-          .catch((error) => {
-            setColor([]);
-          });
-      };
 
     return (
         <Context.Provider value={{

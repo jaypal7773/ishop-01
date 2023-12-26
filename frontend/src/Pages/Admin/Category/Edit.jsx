@@ -42,13 +42,7 @@ function EditCategory() {
       formData.append("name" , event.target.name.value)
       formData.append("slug" , event.target.slug.value)
       formData.append("image" , event.target.image.files[0])
-      // axios.patch(apibaseurl + categorybaseurl + "/edit" + id , formData)
-      // axios.patch(apibaseurl + categorybaseurl + "/edit" + id, formData)
-      // axios.patch(`${apibaseurl}${categorybaseurl}/edit/${id}`, formData)
       axios.patch(`${apibaseurl}${categorybaseurl}/edit/${id}`, formData)
-
-
-
       .then(
         (success) => {
           notify(success.data , "success")

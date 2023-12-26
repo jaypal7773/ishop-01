@@ -9,11 +9,11 @@ const ColorSchema = mongoose.Schema(
             type: String
         },
         status: {
-            type: String,
+            type: Boolean,
             default : true
         },
         color:{
-            type: Boolean,
+            type: String,
             default: null
         }
     },

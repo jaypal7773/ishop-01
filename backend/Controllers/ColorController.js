@@ -34,8 +34,8 @@ class ColorController {
         return new Promise(
             (res, rej) => {
                 try {
-                    const createColor = new Color(data)
-                    createColor.save()
+                     const createColor = new Color(data)
+                   createColor.save()
                         .then(
                             (success) => {
                                 res({
@@ -45,6 +45,7 @@ class ColorController {
                             }
                         ).catch(
                             (error) => {
+                                console.log(error)
                                 rej({
                                     msg: "Unable to create color data",
                                     status: 0
@@ -61,37 +62,37 @@ class ColorController {
         )
     }
 
-    // delete(id){
-    //     return new Promise(
-    //         (res,rej) => {
-    //             try{
-    //                 Color.deleteOne({_id : id})
-    //                 .then(
-    //                     () => {
-    //                         res({
-    //                             msg:"Data deleted",
-    //                             status:1
-    //                         })
-    //                     }
-    //                 ).catch(
-    //                     () => {
-    //                         rej({
-    //                             msg:"Unable to deleted data",
-    //                             status:0
-    //                         })
-    //                     }
-    //                 )
-    //             }catch{
-    //                 () => {
-    //                     rej({
-    //                         msg:"Internal server error",
-    //                         status:0
-    //                     })
-    //                 }
-    //             }
-    //         }
-    //     )
-    // }
+    delete(id){
+        return new Promise(
+            (res,rej) => {
+                try{
+                    Color.deleteOne({_id : id})
+                    .then(
+                        () => {
+                            res({
+                                msg:"Data deleted",
+                                status:1
+                            })
+                        }
+                    ).catch(
+                        () => {
+                            rej({
+                                msg:"Unable to deleted data",
+                                status:0
+                            })
+                        }
+                    )
+                }catch{
+                    () => {
+                        rej({
+                            msg:"Internal server error",
+                            status:0
+                        })
+                    }
+                }
+            }
+        )
+    }
 
     update(id, data) {
         return new Promise(
@@ -126,7 +127,7 @@ class ColorController {
 
     changestatus(id , status){
         return new Promise(
-            (res,rej) => {
+             (res,rej) => {
                 try{
                     Color.updateOne({_id : id} , {status})
                     .then(

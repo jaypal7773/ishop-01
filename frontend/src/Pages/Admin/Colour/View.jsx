@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import { Context } from '../../../MainContext'
 import axios from 'axios'
+import { CiEdit } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 function ViewColor() {
     const { fetchColor, color, apibaseurl, colorbaseurl } = useContext(Context)
@@ -11,38 +14,35 @@ function ViewColor() {
         }, []
     )
 
-    // const statusChange = (id, newStatus) => {
-    //     axios.get(`http://localhost:5000/color/updatestatus/${id}/${newStatus}`)
-    //         .then(
-    //            (success) => {
-    //                 if (success.data.status === 1) {
-    //                     fetchColor()
-    //                 }
-    //             }
-    //         ).catch(
-    //             (error) => {
-    //                 console.log(error)
-    //             }
-    //         )
-    // }
-
-
-    function changeStatus  (id , newStatus)  {
+    function changeStatus(id, newStatus) {
         axios.get(`http://localhost:5000/color/updatestatus/${id}/${newStatus}`)
-        .then(
-          (success) => {
-            if(success.data.status === 1){
-              fetchColor()
-            }
-          }  
-        ).catch(
-          (error) => {
-            console.log(error)
-          }
-        )
-      }
+            .then(
+                (success) => {
+                    if (success.data.status === 1) {
+                        fetchColor()
+                    }
+                }
+            ).catch(
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }
 
-
+    const deleteColor = (id) => {
+        axios.delete(`http://localhost:5000/color/delete/${id}`)
+            .then(
+                (success) => {
+                    if (success.data.status == 1) {
+                        fetchColor()
+                    }
+                }
+            ).catch(
+                (error) => {
+                    console.log(error)
+                }
+            )
+    }
     return (
         <div>
             <div class="relative overflow-x-auto">
@@ -56,13 +56,13 @@ function ViewColor() {
                                 Slug
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Color
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Delete
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Edit
                             </th>
                         </tr>
                     </thead>
@@ -78,13 +78,20 @@ function ViewColor() {
                                             <td class="px-6 py-4">
                                                 {col.slug}
                                             </td>
-                                            <td class="px-6 py-4 cursor-pointer" onClick={() => {
-                                                changeStatus(col._id, !col.status)
+                                            <td class="px-6 py-4">
+                                                {col.color}
+                                            </td>
+                                            <td className={`px-6 py-2 mt-4 cursor-pointer inline-block text-white ${col.status ? 'bg-slate-600' : 'bg-green-600'}`} onClick={(e) => {
+                                                changeStatus(col._id, !col.status);
+                                                e.target.innerText = "Loading..."
                                             }}>
                                                 {col.status ? 'Active' : 'Inactive'}
                                             </td>
-                                            <td class="px-6 py-4 cursor-pointer">
-                                                Delete
+                                            <td className={`px-8 py-2 cursor-pointer text-[28px]`}>
+                                                <MdDelete className=' text-[red]' onClick={() => deleteColor(col._id)} />
+                                                <Link to={"/admin/color/edit/" + col._id}>
+                                                    <CiEdit />
+                                                </Link>
                                             </td>
                                         </tr>
                                     )

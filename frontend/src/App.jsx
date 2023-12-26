@@ -8,7 +8,8 @@ import CategoryAdd from './Pages/Admin/Category/Add';
 import CategoryView from './Pages/Admin/Category/View';
 import EditCategory from './Pages/Admin/Category/Edit';
 import ViewColor from './Pages/Admin/Colour/View';
-import AddColour from './Pages/Admin/Colour/Add';
+import EditColor from './Pages/Admin/Colour/Edit';
+import ColorAdd from './Pages/Admin/Colour/Add';
 
 
 function App() {
@@ -46,11 +47,15 @@ function App() {
           },
           {
             path:"/admin/color/coloradd",
-            element:<AddColour/>
+            element:<ColorAdd/>
           },
           {
             path:"/admin/color/colorview",
             element:<ViewColor/>
+          },
+          {
+            path:"/admin/color/edit/:id",
+            element:<EditColor/>
           }
         ]
       }
