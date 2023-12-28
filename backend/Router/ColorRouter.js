@@ -61,6 +61,7 @@ ColorRouter.patch(
     (req,res) => {
         const id = req.params.id
         const result = new ColorController().update(id , req.body)
+        result
         .then(
             (success) => {
                 res.send("Data edit successfully")

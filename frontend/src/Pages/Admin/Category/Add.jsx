@@ -36,7 +36,7 @@ function CategoryAdd() {
 
   
   return (
-    <div className=' mt-3'>
+    <div className=''>
       <div className=' text-center mt-6 text-[22px] font-semibold'>Category Add</div>
       <form className="max-w-sm mx-auto mt-6" onSubmit={submitHandler} encType='multipart/form-data'>
         <div className="mb-5">

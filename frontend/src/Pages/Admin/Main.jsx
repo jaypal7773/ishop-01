@@ -22,13 +22,13 @@ export default Main
 
 const Header = () => {
   return (
-    <div className=' py-3 shadow-xl sticky top-0 bg-white'></div>
+    <div className=' py-3 shadow-xl sticky top-0 bg-white bg-color text-white px-2 text-w'>Ishop</div>
   )
 }
 
 const Footer = () => {
   return (
-    <div>This is footer</div>
+    <div></div>
   )
 }
 
@@ -59,11 +59,11 @@ const SideMenu = () => {
       children: [
         {
           name: "Add",
-          url: "/admin/product/add",
+          url: "/admin/product/productadd",
         },
         {
           name: "View",
-          url: "/admin/product/view"
+          url: "/admin/product/productview"
         }
       ]
     },

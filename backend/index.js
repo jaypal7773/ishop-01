@@ -3,6 +3,7 @@ const cors = require('cors')
 const Mongoose = require('mongoose')
 const CategoryRouter = require('./Router/CategoryRouter')
 const ColorRouter = require('./Router/ColorRouter')
+const ProductRouter = require('./Router/ProductRouter')
 
 
 const app = express()
@@ -14,6 +15,7 @@ app.use(express.static("public"))
 
 app.use("/category", CategoryRouter)
 app.use("/color" , ColorRouter)
+app.use("/product" , ProductRouter)
 
 Mongoose.connect(
     "mongodb://localhost:27017",

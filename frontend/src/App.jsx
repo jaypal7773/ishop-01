@@ -10,6 +10,7 @@ import EditCategory from './Pages/Admin/Category/Edit';
 import ViewColor from './Pages/Admin/Colour/View';
 import EditColor from './Pages/Admin/Colour/Edit';
 import ColorAdd from './Pages/Admin/Colour/Add';
+import AddProduct from './Pages/Admin/Product/Add';
 
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
           {
             path:"/admin/color/edit/:id",
             element:<EditColor/>
+          },
+          {
+            path:"/admin/product/productadd",
+            element:<AddProduct/>
           }
         ]
       }
