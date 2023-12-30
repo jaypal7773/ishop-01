@@ -88,7 +88,7 @@ const SideMenu = () => {
     }
   ]
   return (
-    <div className='bg-blue-400 h-[100vh] text-white'>
+    <div className='bg-[#011519] h-[100vh] text-white'>
       <div className=' text-center p-2 text-4xl font-semibold'>Admin Panel</div>
       <hr /><hr />
       {

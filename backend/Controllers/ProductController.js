@@ -14,7 +14,8 @@ class ProductController{
                     res({
                         msg:"Data found",
                         status:1,
-                        product
+                        product,
+                        baseUrl: "http://localhost:5000/uploads/imgproduct"
                     })
                     rej({
                         msg:"Unable to found data",
@@ -30,28 +31,53 @@ class ProductController{
         )
     }
 
-    create(data){
+  
+
+    create(data , file) {
         return new Promise(
-            (res,rej) => {
-                try{
-                    const createProduct = new ProductModel(data)
-                    createProduct.save()
-                    .then(
-                        (success) => {
-                            res({
-                                msg:"Data created",
-                                status:1
-                            })
+            (res, rej) => {
+                try {
+                    const images = new Date().getSeconds() + Math.floor(Math.random() * 10000) + file.name;
+                    
+                    const destination = "./public/uploads/imgproduct/" + images;
+                    file.mv(
+                        destination,
+                        (err) => {
+                            if(err){
+                                rej({
+                                    msg:"Unable to upload image",
+                                    status:0
+                                })
+                            }
+                            else{
+                                data.image = images;
+                                const category = new ProductModel(data)
+                                category.save()
+                                    .then(
+                                        (success) => {
+                                            res({
+                                                msg: "Category created",
+                                                status: 1
+                                            })
+                                        }
+                                    ).catch(
+                                        (error) => {
+                                            rej({
+                                                msg: "Unable to create category",
+                                                status: 0
+                                            })
+                                        }
+                                    ) 
+                            }
                         }
-                    ).catch({
-                        msg:"Unable to create data",
-                        status:0
-                    })
-                }catch{
-                    rej({
-                        msg:"Internal server error",
-                        status:0
-                    })
+                    )
+                } catch {
+                    () => {
+                        rej({
+                            msg: "Internal server error",
+                            status: 0
+                        })
+                    }
                 }
             }
         )

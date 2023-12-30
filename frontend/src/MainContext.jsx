@@ -8,11 +8,14 @@ const Context = createContext();
 function MainContext(props) {
     const [category, setCat] = useState([])
     const [color, setColor] = useState([])
+    const [product , setProduct] = useState([])
     const [catImageUrl, setCatImageUrl] = useState(null)
+    const [proImgUrl , setProImgUrl] = useState([])
 
     const apibaseurl = process.env.REACT_APP_API_BASE_URL
     const categorybaseurl = process.env.REACT_APP_CATEGORY_BASE_URL
     const colorbaseurl = process.env.REACT_APP_COLOR_BASE_URL
+    const productbaseurl = process.env.REACT_APP_COLOR_BASE_URL
 
     const notify = (msg, type) => toast(msg, { type })
 
@@ -20,6 +23,7 @@ function MainContext(props) {
         () => {
             fetchCategory()
             fetchColor()
+            fetchProduct()
         }, []
     )
 
@@ -64,6 +68,24 @@ function MainContext(props) {
             )
     }
 
+    const fetchProduct = () => {
+        axios.get(apibaseurl + productbaseurl)
+        .then(
+            (success) => {
+                if(success.data.status == 1){
+                    setProduct(success.data.product)
+                    setProImgUrl(success.data.baseUrl)
+                }else{
+                    setProduct([])
+                }
+            }
+        ).catch(
+            () => {
+                setProduct([])
+            }
+        )
+    }
+
     // const fetchColor = () => {
     //     axios.get(apibaseurl+colorbaseurl)
     //     .then(
@@ -92,7 +114,10 @@ function MainContext(props) {
             catImageUrl,
             fetchColor,
             color,
-            colorbaseurl
+            colorbaseurl,
+            proImgUrl,
+            product,
+            productbaseurl
         }}>
             {props.children}
             <ToastContainer />

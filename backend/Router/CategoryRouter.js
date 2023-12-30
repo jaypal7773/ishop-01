@@ -11,7 +11,7 @@ CategoryRouter.get(
         const result = new CategoryController().get(id)
         result.then(
             (success) => {
-                res.send(success)
+                res.send(success) 
             }
         )
         result.catch(
